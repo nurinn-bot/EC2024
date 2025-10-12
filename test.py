@@ -23,8 +23,6 @@ st.set_page_config(
 
 st.header("Scientific Visualzation", divider="gray")
 
-import streamlit as st
-import plotly.express as px
 
 # Count the occurrences of each gender
 gender_counts = arts_df['Gender'].value_counts().reset_index()
