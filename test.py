@@ -4,5 +4,5 @@ st.set_page_config(
     page_title="Genetic Algorithm"
 )
 
-st.header("Genetic Algorithm", divider="gray")
+st.header("Scientific Visualzation", divider="gray")
 
