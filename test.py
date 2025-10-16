@@ -179,23 +179,25 @@ fig.update_traces(textinfo='percent+label', pull=[0.05]*len(academic_year_counts
 # Display the chart in Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
-# Create a histogram for H.S.C (GPA)
+# Create a count plot (bar chart) using Plotly
 fig = px.histogram(
     arts_df,
-    x='H.S.C (GPA)',
-    nbins=20,  # adjust number of bins as needed
-    title='Distribution of H.S.C (GPA)',
-    marginal='box',  # optional: adds a small boxplot on top for extra insight
-    color_discrete_sequence=['#A1C3D1']  # optional: soft blue color
+    x='Bachelor  Academic Year in EU',
+    color='Gender',
+    title='Distribution of Bachelor Academic Year by Gender in Arts Faculty',
+    barmode='group',  # use 'stack' for stacked bars if preferred
+    color_discrete_sequence=px.colors.qualitative.Pastel  # optional: soft color palette
 )
 
-# Add density curve (KDE equivalent)
-fig.update_traces(opacity=0.7)
+# Customize layout for readability
 fig.update_layout(
-    xaxis_title='H.S.C (GPA)',
-    yaxis_title='Frequency',
-    margin=dict(l=20, r=20, t=60, b=60)
+    xaxis_title='Academic Year',
+    yaxis_title='Count',
+    xaxis_tickangle=-45,  # rotate x-axis labels
+    margin=dict(l=20, r=20, t=60, b=60),
+    bargap=0.15
 )
 
 # Display in Streamlit
 st.plotly_chart(fig, use_container_width=True)
+
