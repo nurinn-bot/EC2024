@@ -111,3 +111,70 @@ fig.update_layout(
 # Display in Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
+
+# Create a box plot using Plotly
+fig = px.box(
+    arts_df,
+    x='Gender',
+    y='H.S.C (GPA)',
+    title='Comparison of H.S.C (GPA) by Gender in Arts Faculty',
+    color='Gender',  # optional: gives each gender a different color
+    color_discrete_sequence=px.colors.qualitative.Pastel  # optional nice color palette
+)
+
+# Customize layout
+fig.update_layout(
+    xaxis_title='Gender',
+    yaxis_title='H.S.C (GPA)',
+    boxmode='group',
+    margin=dict(l=20, r=20, t=60, b=60)
+)
+
+# Display in Streamlit
+st.plotly_chart(fig, use_container_width=True)
+
+# Calculate the average H.S.C (GPA) for each gender
+average_hsc_gpa_by_gender = arts_df.groupby('Gender')['H.S.C (GPA)'].mean().reset_index()
+
+# Create a bar chart using Plotly
+fig = px.bar(
+    average_hsc_gpa_by_gender,
+    x='Gender',
+    y='H.S.C (GPA)',
+    title='Average H.S.C (GPA) by Gender in Arts Faculty',
+    text='H.S.C (GPA)',
+    color='Gender',  # optional: distinct color per gender
+    color_discrete_sequence=px.colors.qualitative.Pastel  # optional: soft colors
+)
+
+# Customize layout
+fig.update_traces(texttemplate='%{text:.2f}', textposition='outside')  # show GPA to 2 decimals
+fig.update_layout(
+    xaxis_title='Gender',
+    yaxis_title='Average H.S.C (GPA)',
+    uniformtext_minsize=8,
+    uniformtext_mode='hide',
+    margin=dict(l=20, r=20, t=60, b=60)
+)
+
+# Display the chart in Streamlit
+st.plotly_chart(fig, use_container_width=True)
+
+# Count the occurrences of each academic year
+academic_year_counts = arts_df['Bachelor  Academic Year in EU'].value_counts().reset_index()
+academic_year_counts.columns = ['Academic Year', 'Count']
+
+# Create a pie chart using Plotly
+fig = px.pie(
+    academic_year_counts,
+    names='Academic Year',
+    values='Count',
+    title='Distribution of Bachelor Academic Year in Arts Faculty',
+    color_discrete_sequence=px.colors.qualitative.Pastel  # optional: soft color palette
+)
+
+# Optional: show percentages directly on slices
+fig.update_traces(textinfo='percent+label', pull=[0.05]*len(academic_year_counts))
+
+# Display the chart in Streamlit
+st.plotly_chart(fig, use_container_width=True)
