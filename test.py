@@ -8,17 +8,18 @@ st.set_page_config(
     layout="wide"
 )
 
-st.header("Arts Faculty Gender Distribution Analysis 📊", divider="blue")
+st.header("Arts Faculty Data Analysis and Visualization 📊", divider="blue")
 
-# --- 1. Data Preparation (Replace with your actual data loading) ---
+# ######################################################################
+# --- 1. DATA LOADING FROM URL (Replaced Dummy Data) ---
+url = 'https://raw.githubusercontent.com/izzatimahrup/SV2025/refs/heads/main/arts_student_survey_output.csv'
 
-# Example data for demonstration purposes
-data = {
-    'Gender': ['Female', 'Male', 'Female', 'Non-Binary', 'Male', 'Female', 'Female', 'Male', 'Female', 'Male', 'Female', 'Male']
-}
-arts_df = pd.DataFrame(data)
+# Load data from the remote CSV file
+# Consider using @st.cache_data for improved performance in a real Streamlit app
+arts_df = pd.read_csv(url)
 
 # Calculate the counts and reset the index to create a Plotly-friendly DataFrame
+# Assumes the loaded CSV has a column named 'Gender'
 gender_counts_df = arts_df['Gender'].value_counts().reset_index()
 gender_counts_df.columns = ['Gender', 'Count']
 
@@ -26,7 +27,7 @@ st.write("Data summary (Counts):")
 st.dataframe(gender_counts_df, hide_index=True)
 
 # ----------------------------------------------------------------------
-## Bar Chart (Matplotlib/Seaborn converted to Plotly Express)
+## Bar Chart (Plotly Express)
 
 st.subheader("Gender Distribution: Bar Chart")
 
@@ -51,7 +52,7 @@ fig_bar.update_layout(
 st.plotly_chart(fig_bar, use_container_width=True)
 
 # ----------------------------------------------------------------------
-## Pie Chart (Matplotlib converted to Plotly Express)
+## Pie Chart (Plotly Express)
 
 st.subheader("Gender Distribution: Pie Chart")
 
