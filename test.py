@@ -81,3 +81,33 @@ fig_pie.update_layout(
 # Display the chart in Streamlit
 # Note: use_container_width=False is often better for preserving the circular shape
 st.plotly_chart(fig_pie, use_container_width=False)
+
+# Count the occurrences of each academic year
+academic_year_counts = arts_df['Bachelor  Academic Year in EU'].value_counts().reset_index()
+academic_year_counts.columns = ['Academic Year', 'Count']
+
+# Create a bar chart using Plotly
+fig = px.bar(
+    academic_year_counts,
+    x='Academic Year',
+    y='Count',
+    title='Distribution of Bachelor Academic Year in Arts Faculty',
+    text='Count',
+    color='Academic Year',  # optional: adds color variation by category
+    color_discrete_sequence=px.colors.qualitative.Pastel  # optional: soft color palette
+)
+
+# Customize layout and labels
+fig.update_traces(textposition='outside')
+fig.update_layout(
+    xaxis_title='Academic Year',
+    yaxis_title='Count',
+    xaxis_tickangle=-45,  # rotate x-axis labels
+    uniformtext_minsize=8,
+    uniformtext_mode='hide',
+    margin=dict(l=20, r=20, t=60, b=60)
+)
+
+# Display in Streamlit
+st.plotly_chart(fig, use_container_width=True)
+
