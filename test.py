@@ -178,3 +178,24 @@ fig.update_traces(textinfo='percent+label', pull=[0.05]*len(academic_year_counts
 
 # Display the chart in Streamlit
 st.plotly_chart(fig, use_container_width=True)
+
+# Create a histogram for H.S.C (GPA)
+fig = px.histogram(
+    arts_df,
+    x='H.S.C (GPA)',
+    nbins=20,  # adjust number of bins as needed
+    title='Distribution of H.S.C (GPA)',
+    marginal='box',  # optional: adds a small boxplot on top for extra insight
+    color_discrete_sequence=['#A1C3D1']  # optional: soft blue color
+)
+
+# Add density curve (KDE equivalent)
+fig.update_traces(opacity=0.7)
+fig.update_layout(
+    xaxis_title='H.S.C (GPA)',
+    yaxis_title='Frequency',
+    margin=dict(l=20, r=20, t=60, b=60)
+)
+
+# Display in Streamlit
+st.plotly_chart(fig, use_container_width=True)
