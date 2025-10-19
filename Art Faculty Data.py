@@ -12,7 +12,7 @@ st.header("Arts Faculty Data Analysis and Visualization 📊", divider="blue")
 
 # ######################################################################
 # --- 1. DATA LOADING FROM URL (Replaced Dummy Data) ---
-url = 'https://raw.githubusercontent.com/izzatimahrup/SV2025/refs/heads/main/arts_student_survey_output.csv'
+url = 'https://raw.githubusercontent.com/nurinn-bot/EC2024/refs/heads/main/arts_df_exported.csv'
 col1, col2, col3, col4 = st.columns(4)
     
 col1.metric(label="PLO 2", value=f"3.3", help="PLO 2: Cognitive Skill", border=True)
